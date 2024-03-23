@@ -1,3 +1,4 @@
+import './styles.css';
 const context = new AudioContext();
 const A = 55.00;
 const step_to_note = {
