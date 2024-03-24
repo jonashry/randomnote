@@ -29,7 +29,7 @@ function generateNote() {
     const gainNode = context.createGain();
     oscillator.connect(gainNode);
     gainNode.connect(context.destination);
-    gainNode.gain.exponentialRampToValueAtTime(0.000001, context.currentTime+5);
+    gainNode.gain.exponentialRampToValueAtTime(0.000001, context.currentTime+6);
     oscillator.start(0);
 }
 

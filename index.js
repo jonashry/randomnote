@@ -15,22 +15,28 @@ const step_to_note = {
     11: "G#"
 }
 
-function generateNote() {
-    var randomOctave = Math.floor(Math.random()*3+1); 
-    var randomStep = Math.floor(Math.random()*11);
-    var randomFrequency = getNoteFrequency(randomOctave, randomStep);
-    document.getElementById("note").innerText = randomFrequency.toFixed(2) + "Hz - " + getNoteName(randomOctave, randomStep);
+var generatedNotes = [];
 
+function playNote(frequency) {
     oscillator = context.createOscillator();
     
     oscillator.type = "sine"
-    oscillator.frequency.value = randomFrequency;
+    oscillator.frequency.value = frequency;
 
     const gainNode = context.createGain();
     oscillator.connect(gainNode);
     gainNode.connect(context.destination);
-    gainNode.gain.exponentialRampToValueAtTime(0.000001, context.currentTime+5);
+    gainNode.gain.exponentialRampToValueAtTime(0.000001, context.currentTime+6);
     oscillator.start(0);
+}
+
+function generateNote() {
+    var randomOctave = Math.floor(Math.random()*3+1); 
+    var randomStep = Math.floor(Math.random()*11);
+    var randomFrequency = getNoteFrequency(randomOctave, randomStep);
+    generatedNotes.push(randomFrequency);
+    document.getElementById("note").innerText = randomFrequency.toFixed(2) + "Hz - " + getNoteName(randomOctave, randomStep);
+    playNote(randomFrequency);
 }
 
 function getNoteName(octave, step) {
@@ -40,4 +46,12 @@ function getNoteName(octave, step) {
 function getNoteFrequency(octave, step) {
     var exponent = (12*(octave-1)+step)/12; 
     return A*Math.pow(2, exponent)
+}
+
+function repeatNote() {
+    if (generatedNotes.length>0) {
+        console.log("repeat note");
+        frequency = generatedNotes[generatedNotes.length-1];
+        playNote(frequency);
+    }
 }
