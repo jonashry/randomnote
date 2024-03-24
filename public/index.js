@@ -55,3 +55,15 @@ function repeatNote() {
         playNote(frequency);
     }
 }
+
+function toggleVisibility() {
+    var div = document.getElementById("note");
+    var toggleBtn = document.getElementById("show-note-btn");
+    if (div.style.display==="none" || div.style.display === "") {
+        div.style.display = "block";
+        toggleBtn.textContent = "hide";
+    } else {
+        div.style.display = "none";
+        toggleBtn.textContent = "show";
+    }
+}
