@@ -1,0 +1,13 @@
+* {
+    font-family: 'Roboto Mono';
+}
+
+body {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#note {
+    font-size: 24px;
+    margin-top: 20px;
+}
